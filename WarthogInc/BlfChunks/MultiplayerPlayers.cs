@@ -45,21 +45,27 @@ namespace Sunrise.BlfTool
             Console.WriteLine("Warning: mmpl chunk definition is incomplete.");
             Console.ResetColor();
 
+            hoppersStream.SeekRelative(0x4);
+
+
             players = new MultiplayerPlayer[playerCount];
             for (int i = 0; i < playerCount; i++)
             {
 
                 MultiplayerPlayer player = new MultiplayerPlayer();
-                hoppersStream.SeekRelative(0x4);
 
                 bool playerExists = hoppersStream.Read<byte>(8) > 0;
+
                 if (!playerExists)
                 {
-                    hoppersStream.SeekRelative(0x11e - 5);
+                    hoppersStream.SeekRelative(0x11D);
                     continue;
                 }
 
-                hoppersStream.SeekRelative(0xE - 5);
+                player.machineIndex = hoppersStream.Read<byte>(8);
+                player.playerIdentifier = hoppersStream.Read<ulong>(64);
+
+                //hoppersStream.SeekRelative(0xE - 5);
                 //player.playerExists = hoppersStream.Read<byte>(8) > 0;
                 //player.machineIdentifier = hoppersStream.Read<byte>(8);
                 //player.playerIdentifier = hoppersStream.Read<ulong>(64);
@@ -82,10 +88,10 @@ namespace Sunrise.BlfTool
                 player.secondaryColor = (Color)hoppersStream.Read<byte>(8);
                 player.tertiaryColor = (Color)hoppersStream.Read<byte>(8);
                 player.isElite = (PlayerModel)hoppersStream.Read<byte>(8);
+                hoppersStream.SeekRelative(1);
                 player.foregroundEmblem = hoppersStream.Read<byte>(8);
                 player.backgroundEmblem = hoppersStream.Read<byte>(8);
                 player.emblemFlags = hoppersStream.Read<byte>(8);
-                hoppersStream.SeekRelative(1);
                 player.emblemPrimaryColor = (Color)hoppersStream.Read<byte>(8);
                 player.emblemSecondaryColor = (Color)hoppersStream.Read<byte>(8);
                 player.emblemBackgroundColor = (Color)hoppersStream.Read<byte>(8);
@@ -163,7 +169,7 @@ namespace Sunrise.BlfTool
 
         public class MultiplayerPlayer
         {
-            public bool playerExists;
+            public byte machineIndex;
             public byte machineIdentifier;
             public ulong playerIdentifier;
             public string playerNameClient; // wide, 16 chars
