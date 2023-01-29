@@ -15,6 +15,7 @@ namespace Sunrise.BlfTool
 {
     public class MultiplayerPlayers : IBLFChunk
     {
+        public int unk1;
         public MultiplayerPlayer[] players;
 
         public ushort GetAuthentication()
@@ -41,11 +42,7 @@ namespace Sunrise.BlfTool
         {
             byte playerCount = 16;
 
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("Warning: mmpl chunk definition is incomplete.");
-            Console.ResetColor();
-
-            hoppersStream.SeekRelative(0x4);
+            unk1 = hoppersStream.Read<int>(32);
 
 
             players = new MultiplayerPlayer[playerCount];
@@ -64,11 +61,6 @@ namespace Sunrise.BlfTool
 
                 player.machineIndex = hoppersStream.Read<byte>(8);
                 player.playerIdentifier = hoppersStream.Read<ulong>(64);
-
-                //hoppersStream.SeekRelative(0xE - 5);
-                //player.playerExists = hoppersStream.Read<byte>(8) > 0;
-                //player.machineIdentifier = hoppersStream.Read<byte>(8);
-                //player.playerIdentifier = hoppersStream.Read<ulong>(64);
 
                 LinkedList<byte> nameBytes = new LinkedList<byte>();
                 for (int si = 0; si < 16; si++)
@@ -132,8 +124,53 @@ namespace Sunrise.BlfTool
                 player.isFriendCreatedContentAllowed = hoppersStream.Read<byte>(8) > 0;
                 player.isGriefer = hoppersStream.Read<byte>(8) > 0;
 
-                hoppersStream.SeekRelative(0x23 + 0x50 + 2);
-
+                player.unk18 = hoppersStream.Read<byte>(8);
+                player.unk19 = hoppersStream.Read<byte>(8);
+                player.unk20 = hoppersStream.Read<byte>(8);
+                player.unk21 = hoppersStream.Read<byte>(8);
+                player.unk22 = hoppersStream.Read<byte>(8);
+                player.unk23 = hoppersStream.Read<int>(32);
+                player.unk23 = hoppersStream.Read<int>(32);
+                player.unk25 = hoppersStream.Read<int>(32);
+                player.unk26 = hoppersStream.Read<int>(32);
+                player.unk27 = hoppersStream.Read<int>(32);
+                player.unk28 = hoppersStream.Read<int>(32);
+                player.unk29 = hoppersStream.Read<byte>(8);
+                player.unk30 = hoppersStream.Read<byte>(8);
+                player.unk31 = hoppersStream.Read<byte>(8);
+                player.unk32 = hoppersStream.Read<byte>(8);
+                player.unk33 = hoppersStream.Read<int>(32);
+                player.unk34 = hoppersStream.Read<int>(32);
+                player.unk35 = hoppersStream.Read<int>(32);
+                player.unk36 = hoppersStream.Read<byte>(8);
+                player.unk37 = hoppersStream.Read<byte>(8);
+                player.unk38 = hoppersStream.Read<byte>(8);
+                player.unk39 = hoppersStream.Read<byte>(8);
+                player.unk40 = hoppersStream.Read<int>(32);
+                player.unk41 = hoppersStream.Read<int>(32);
+                player.unk42 = hoppersStream.Read<int>(32);
+                player.unk43 = hoppersStream.Read<int>(32);
+                player.unk44 = hoppersStream.Read<int>(32);
+                player.unk45 = hoppersStream.Read<int>(32);
+                player.unk46 = hoppersStream.Read<int>(32);
+                player.unk47 = hoppersStream.Read<int>(32);
+                player.unk48 = hoppersStream.Read<ulong>(64);
+                player.unk49 = hoppersStream.Read<byte>(8);
+                player.unk50 = hoppersStream.Read<byte>(8);
+                player.unk51 = hoppersStream.Read<byte>(8);
+                player.unk52 = hoppersStream.Read<byte>(8);
+                player.unk53 = hoppersStream.Read<byte>(8);
+                player.unk54 = hoppersStream.Read<byte>(8);
+                player.unk55 = hoppersStream.Read<byte>(8);
+                player.unk56 = hoppersStream.Read<byte>(8);
+                player.unk57 = hoppersStream.Read<byte>(8);
+                player.unk58 = hoppersStream.Read<byte>(8);
+                player.unk59 = hoppersStream.Read<byte>(8);
+                player.unk60 = hoppersStream.Read<byte>(8);
+                player.unk61 = hoppersStream.Read<int>(32);
+                player.unk62 = hoppersStream.Read<int>(32);
+                player.unk63 = hoppersStream.Read<int>(32);
+                player.unk64 = hoppersStream.Read<int>(32);
 
                 nameBytes = new LinkedList<byte>();
                 for (int si = 0; si < 16; si++)
@@ -148,14 +185,28 @@ namespace Sunrise.BlfTool
                     nameBytes.AddLast(right);
                 }
 
-                hoppersStream.SeekRelative(0xC);
+                player.unk1 = hoppersStream.Read<int>(32);
+                player.unk2 = hoppersStream.Read<int>(32);
+                player.unk3 = hoppersStream.Read<byte>(8);
+                player.unk4 = hoppersStream.Read<byte>(8);
+                player.unk5 = hoppersStream.Read<byte>(8);
+                player.unk6 = hoppersStream.Read<byte>(8);
 
                 player.globalEXP = hoppersStream.Read<int>(32);
                 player.rank = (Rank)hoppersStream.Read<int>(32) - 1;
                 player.grade = (Grade)hoppersStream.Read<int>(32);
 
-
-                hoppersStream.SeekRelative(0x10);
+                player.unk7 = hoppersStream.Read<byte>(8);
+                player.unk8 = hoppersStream.Read<byte>(8);
+                player.unk9 = hoppersStream.Read<byte>(8);
+                player.unk10 = hoppersStream.Read<byte>(8);
+                player.unk11 = hoppersStream.Read<int>(32);
+                player.unk12 = hoppersStream.Read<int>(32);
+                player.unk13 = hoppersStream.Read<int>(32);
+                player.unk14 = hoppersStream.Read<byte>(8);
+                player.unk15 = hoppersStream.Read<byte>(8);
+                player.unk16 = hoppersStream.Read<byte>(8);
+                player.unk17 = hoppersStream.Read<byte>(8);
 
                 players[i] = player;
             }
@@ -171,6 +222,7 @@ namespace Sunrise.BlfTool
         {
             public byte machineIndex;
             public byte machineIdentifier;
+            [JsonConverter(typeof(XUIDConverter))]
             public ulong playerIdentifier;
             public string playerNameClient; // wide, 16 chars
             public byte femaleVoice; // includes gender i think
@@ -221,12 +273,77 @@ namespace Sunrise.BlfTool
             public bool isUserCreatedContentAllowed;
             public bool isFriendCreatedContentAllowed;
             public bool isGriefer;
+            public byte unk18;
+            public byte unk19;
+            public byte unk20;
+            public byte unk21;
+            public byte unk22;
+            public int unk23;
+            public int unk24;
+            public int unk25;
+            public int unk26;
+            public int unk27;
+            public int unk28;
+            public byte unk29;
+            public byte unk30;
+            public byte unk31;
+            public byte unk32;
+            public int unk33;
+            public int unk34;
+            public int unk35;
+            public byte unk36;
+            public byte unk37;
+            public byte unk38;
+            public byte unk39;
+            public int unk40;
+            public int unk41;
+            public int unk42;
+            public int unk43;
+            public int unk44;
+            public int unk45;
+            public int unk46;
+            public int unk47;
+            [JsonConverter(typeof(XUIDConverter))]
+            public ulong unk48;
+            public byte unk49;
+            public byte unk50;
+            public byte unk51;
+            public byte unk52;
+            public byte unk53;
+            public byte unk54;
+            public byte unk55;
+            public byte unk56;
+            public byte unk57;
+            public byte unk58;
+            public byte unk59;
+            public byte unk60;
+            public int unk61;
+            public int unk62;
+            public int unk63;
+            public int unk64;
             public string playerNameHost;
+            public int unk1;
+            public int unk2;
+            public byte unk3;
+            public byte unk4;
+            public byte unk5;
+            public byte unk6;
             public int globalEXP;
             [JsonConverter(typeof(StringEnumConverter))]
             public Rank rank;
             [JsonConverter(typeof(StringEnumConverter))]
             public Grade grade;
+            public byte unk7;
+            public byte unk8;
+            public byte unk9;
+            public byte unk10;
+            public int unk11;
+            public int unk12;
+            public int unk13;
+            public byte unk14;
+            public byte unk15;
+            public byte unk16;
+            public byte unk17;
 
 
         }
