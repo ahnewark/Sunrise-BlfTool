@@ -8,10 +8,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WarthogInc.BlfChunks;
-using static WarthogInc.BlfChunks.ServiceRecordIdentity;
+using SunriseBlfTool.BlfChunks;
+using static SunriseBlfTool.BlfChunks.ServiceRecordIdentity;
 
-namespace Sunrise.BlfTool
+namespace SunriseBlfTool
 {
     public class MultiplayerPlayers : IBLFChunk
     {
