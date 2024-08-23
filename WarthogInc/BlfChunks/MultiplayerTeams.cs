@@ -53,7 +53,7 @@ namespace SunriseBlfTool
 
                 if (!teamExists)
                 {
-                    hoppersStream.SeekRelative(0x11D);
+                    hoppersStream.SeekRelative(3);
                     continue;
                 }
 
