@@ -37,7 +37,7 @@ namespace SunriseBlfTool
             return 2;
         }
 
-        public void ReadChunk(ref BitStream<StreamByteStream> hoppersStream)
+        public void ReadChunk(ref BitStream<StreamByteStream> hoppersStream, BLFChunkReader reader)
         {
             byte playerCount = 16;
             byte validPlayerCount = 0;
